@@ -1,0 +1,14 @@
+name: lfqa_env
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - numpy
+  - pip
+  - pip:
+    - gradio
+    - farm-haystack[all]
+    - PyPDF2
+    - python-docx
+    - jupyterlab
+    - einops
