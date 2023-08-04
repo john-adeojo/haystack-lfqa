@@ -1,19 +1,20 @@
 import streamlit as st
-import multiprocessing
+import logging
+import ast  # add this import at the start of your script
+
+
+log_placeholder = st.empty()
 
 from data_preprocessing import preprocess_docs, vector_stores
 from create_pipeline import make_document_qa_pipeline
 from create_ai_agent import create_agent
-from utils import SingletonToken
+from utils import SingletonToken, get_final_answer
 import time
-
 
 if __name__ == '__main__':
 
-    # multiprocessing.freeze_support()
-
     def preprocess():
-        doc_dir = r"C:\Users\johna\anaconda3\envs\lfqa_env\haystack-lfqa\documents"
+        doc_dir = r"C:\Users\johna\anaconda3\envs\lfqa_env\haystack-lfqa\documents" # replace with your own directory
         
         with st.spinner("Preprocessing docs..."):
             time.sleep(5)
@@ -62,7 +63,8 @@ if API_KEY:
         with st.spinner('Agent is working...'):
             result = st.session_state["agent"].run(query_user)
             output = result["transcript"].split("---")[0]
-            st.write(output)
+            final_answer = get_final_answer(output)
+            st.write(final_answer)
 else:
     # If OpenAI key and data_url are not set, show a message
     placeholder.markdown(

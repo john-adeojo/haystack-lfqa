@@ -1,6 +1,7 @@
 from haystack.nodes import PreProcessor
 from haystack.utils import convert_files_to_docs
 from haystack.document_stores import FAISSDocumentStore
+from sqlalchemy import create_engine
 
 # pre-process docs 
 def preprocess_docs(doc_dir):
@@ -18,8 +19,13 @@ def preprocess_docs(doc_dir):
     print(f"n_files_input: {len(all_docs)}\nn_docs_output: {len(docs)}")
     return docs
 
+
 # create FAISS in memory
 def vector_stores(docs):
-    document_store = FAISSDocumentStore(sql_url="sqlite:///:memory:", faiss_index_factory_str="Flat", embedding_dim=768)
+    engine = create_engine('sqlite:///C:/Users/johna/anaconda3/envs/lfqa_env/haystack-lfqa/database/database.db')
+    engine.execute("DROP TABLE document") 
+    
+    document_store = FAISSDocumentStore(sql_url="sqlite:///C:/Users/johna/anaconda3/envs/lfqa_env/haystack-lfqa/database/database.db", faiss_index_factory_str="Flat", embedding_dim=768)
     document_store.write_documents(docs)
+    
     return document_store
