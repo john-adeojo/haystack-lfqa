@@ -23,7 +23,7 @@ def create_agent(document_qa, API_KEY):
     Observation: the tool will respond with the result
     ...
     
-    Final Answer: the final answer to the question, make it short (1-5 words)
+    Final Answer: the final answer to the question, make it short (200 words)
     Thought, Tool, Tool Input, and Observation steps can be repeated multiple times, but sometimes we can find an answer in the first pass
     ---
     

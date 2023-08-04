@@ -8,7 +8,7 @@ log_placeholder = st.empty()
 from data_preprocessing import preprocess_docs, vector_stores
 from create_pipeline import make_document_qa_pipeline
 from create_ai_agent import create_agent
-from utils import SingletonToken, get_final_answer
+from utils import SingletonToken, get_final_thought_and_answer
 import time
 
 if __name__ == '__main__':
@@ -63,8 +63,9 @@ if API_KEY:
         with st.spinner('Agent is working...'):
             result = st.session_state["agent"].run(query_user)
             output = result["transcript"].split("---")[0]
-            final_answer = get_final_answer(output)
-            st.write(final_answer)
+            final_thought, final_answer = get_final_thought_and_answer(output)
+            st.write(f"Final Thought: {final_thought}")
+            st.write(f"Final Answer: {final_answer}")
 else:
     # If OpenAI key and data_url are not set, show a message
     placeholder.markdown(
