@@ -23,7 +23,7 @@ def create_agent(document_qa, API_KEY):
     Observation: the tool will respond with the result
     ...
     
-    Final Answer: the final answer to the question, make it short (200 words)
+    Final Answer: the final answer to the question, be concise (500 words maximum).
     Thought, Tool, Tool Input, and Observation steps can be repeated multiple times, but sometimes we can find an answer in the first pass
     ---
     
@@ -32,13 +32,14 @@ def create_agent(document_qa, API_KEY):
     """,
         output_parser=AnswerParser(),
     )
-    prompt_node = PromptNode(model_name_or_path="gpt-4", default_prompt_template=react_prompt, api_key=API_KEY, stop_words=["Observation:"], model_kwargs={"temperature":0})
+    prompt_node = PromptNode(model_name_or_path="gpt-4", default_prompt_template=react_prompt, api_key=API_KEY, max_length=300,
+ stop_words=["Observation:"], model_kwargs={"temperature":0})
     agent = Agent(prompt_node=prompt_node)
 
     search_tool = Tool(
     name="document_qa",
     pipeline_or_node=document_qa,
-    description="useful for when you need to answer any question",
+    description="useful for finding the answer to a question about the Russian Invasion of Ukrain",
     output_variable="answers",
 )
     agent.add_tool(search_tool)
