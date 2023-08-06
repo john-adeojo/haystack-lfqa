@@ -20,7 +20,7 @@ def preprocess_docs(doc_dir):
     return docs
 
 
-# create FAISS in memory use if you want to store db locally
+# create FAISS
 def vector_stores(docs):
     engine = create_engine('sqlite:///C:/Users/johna/anaconda3/envs/lfqa_env/haystack-lfqa/database/database.db')  # change to your local directory
     
@@ -35,12 +35,3 @@ def vector_stores(docs):
     document_store.write_documents(docs)
     
     return document_store
-
-# def vector_stores(docs):
-#     engine = create_engine('sqlite:///C:/Users/johna/anaconda3/envs/lfqa_env/haystack-lfqa/database/database.db')  # change to your local directory
-#     engine.execute("DROP TABLE document") 
-    
-#     document_store = FAISSDocumentStore(sql_url="sqlite:///C:/Users/johna/anaconda3/envs/lfqa_env/haystack-lfqa/database/database.db", faiss_index_factory_str="Flat", embedding_dim=768) # change to your local directory
-#     document_store.write_documents(docs)
-    
-#     return document_store

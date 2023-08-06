@@ -39,7 +39,7 @@ def create_agent(document_qa, API_KEY):
     search_tool = Tool(
     name="document_qa",
     pipeline_or_node=document_qa,
-    description="useful for finding the answer to a question about the Russian Invasion of Ukrain",
+    description="useful for finding the answer to a question about the Russian Invasion of Ukraine",
     output_variable="answers",
 )
     agent.add_tool(search_tool)
