@@ -6,9 +6,5 @@ dependencies:
   - numpy
   - pip
   - pip:
-    - gradio
     - farm-haystack[all]
-    - PyPDF2
-    - python-docx
     - jupyterlab
-    - einops
