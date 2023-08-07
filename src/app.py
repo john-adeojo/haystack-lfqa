@@ -2,7 +2,6 @@ import streamlit as st
 import logging
 import ast  # add this import at the start of your script
 
-
 log_placeholder = st.empty()
 
 from data_preprocessing import preprocess_docs, vector_stores

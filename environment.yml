@@ -8,3 +8,4 @@ dependencies:
   - pip:
     - farm-haystack[all]
     - jupyterlab
+    - streamlit
